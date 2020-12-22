@@ -50,7 +50,11 @@ case "$1" in
     sed -i '' "s/# server.2=.*/server.2=$HOSTNAME:2886:3886;2182/" nifi-1/conf/zookeeper.properties
     sed -i '' "s/# server.2=.*/server.2=$HOSTNAME:2886:3886;2182/" nifi-2/conf/zookeeper.properties
 
-    sed -i '' "s/^nifi.web.http.port=.*/nifi.web.http.port=8081/" nifi-2/conf/nifi.properties
+    sed -i '' "s/^nifi.web.http.port=.*/nifi.web.http.port=/" nifi-2/conf/nifi.properties
+    sed -i '' "s/^nifi.web.https.host=.*/nifi.web.https.host=$HOSTNAME/" nifi-2/conf/nifi.properties
+    sed -i '' "s/^nifi.web.https.port=.*/nifi.web.https.port=8444/" nifi-2/conf/nifi.properties
+
+   
     sed -i '' "s/nifi.cluster.flow.election.max.candidates=.*/nifi.cluster.flow.election.max.candidates=2/" nifi-1/conf/nifi.properties
     sed -i '' "s/nifi.cluster.flow.election.max.candidates=.*/nifi.cluster.flow.election.max.candidates=2/" nifi-2/conf/nifi.properties
     sed -i '' "s/nifi.cluster.node.protocol.port=.*/nifi.cluster.node.protocol.port=7778/" nifi-2/conf/nifi.properties
@@ -78,14 +82,15 @@ case "$1" in
 
     sed -i '' "s/# server.2=.*/server.2=$HOSTNAME:2886:3886;2182/" nifi-1/conf/zookeeper.properties
     sed -i '' "s/# server.3=.*/server.3=$HOSTNAME:2887:3887;2183/" nifi-1/conf/zookeeper.properties
-
     sed -i '' "s/# server.2=.*/server.2=$HOSTNAME:2886:3886;2182/" nifi-2/conf/zookeeper.properties
     sed -i '' "s/# server.3=.*/server.3=$HOSTNAME:2887:3887;2183/" nifi-2/conf/zookeeper.properties
-
     sed -i '' "s/# server.2=.*/server.2=$HOSTNAME:2886:3886;2182/" nifi-3/conf/zookeeper.properties
     sed -i '' "s/# server.3=.*/server.3=$HOSTNAME:2887:3887;2183/" nifi-3/conf/zookeeper.properties
 
-    sed -i '' "s/^nifi.web.http.port=.*/nifi.web.http.port=8082/" nifi-3/conf/nifi.properties
+    sed -i '' "s/^nifi.web.http.port=.*/nifi.web.http.port=/" nifi-3/conf/nifi.properties
+    sed -i '' "s/^nifi.web.https.host=.*/nifi.web.https.host=$HOSTNAME/" nifi-3/conf/nifi.properties
+    sed -i '' "s/^nifi.web.https.port=.*/nifi.web.https.port=8445/" nifi-3/conf/nifi.properties
+
     sed -i '' "s/nifi.cluster.flow.election.max.candidates=.*/nifi.cluster.flow.election.max.candidates=3/" nifi-1/conf/nifi.properties
     sed -i '' "s/nifi.cluster.flow.election.max.candidates=.*/nifi.cluster.flow.election.max.candidates=3/" nifi-2/conf/nifi.properties
     sed -i '' "s/nifi.cluster.flow.election.max.candidates=.*/nifi.cluster.flow.election.max.candidates=3/" nifi-3/conf/nifi.properties
