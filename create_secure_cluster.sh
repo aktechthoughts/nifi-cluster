@@ -10,12 +10,22 @@ case "$1" in
 
     rm -Rf nifi-1 > /dev/null 2>&1
     cp -r nifi-0 nifi-1 
+
+    ./create_certificate.sh 1
+
+    mv certs/node01/* nifi-1/conf/
     
     sed -i '' "s/nifi.state.management.embedded.zookeeper.start=false/nifi.state.management.embedded.zookeeper.start=true/" nifi-1/conf/nifi.properties
     mkdir -p nifi-1/state/zookeeper/
     echo 1 > nifi-1/state/zookeeper/myid
 
-    sed -i '' "s/^nifi.web.http.host=.*/nifi.web.http.host=$HOSTNAME/" nifi-1/conf/nifi.properties
+    sed -i '' "s/^nifi.web.http.port=.*/nifi.web.http.port=/" nifi-1/conf/nifi.properties
+    sed -i '' "s/^nifi.web.https.host=.*/nifi.web.https.host=$HOSTNAME/" nifi-1/conf/nifi.properties
+    sed -i '' "s/^nifi.web.https.port=.*/nifi.web.https.port=8443/" nifi-1/conf/nifi.properties
+
+    sed -i '' "s/nifi.remote.input.secure=.*/nifi.remote.input.secure=true/" nifi-1/conf/nifi.properties
+    sed -i '' "s/nifi.cluster.protocol.is.secure=.*/nifi.cluster.protocol.is.secure=true/" nifi-1/conf/nifi.properties
+
     sed -i '' "s/nifi.zookeeper.connect.string=.*/nifi.zookeeper.connect.string=$HOSTNAME:2181/" nifi-1/conf/nifi.properties    
     sed -i '' "s/server.1=.*/server.1=$HOSTNAME:2885:3885;2181/" nifi-1/conf/zookeeper.properties
     sed -i '' "s/nifi.cluster.is.node=false/nifi.cluster.is.node=true/" nifi-1/conf/nifi.properties
