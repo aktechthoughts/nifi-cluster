@@ -1,5 +1,4 @@
 #!/bin/bash
-
 set -x
 
 
@@ -32,6 +31,10 @@ case "$1" in
     sed -i '' "s/nifi.cluster.node.protocol.port=.*/nifi.cluster.node.protocol.port=7777/" nifi-1/conf/nifi.properties
     sed -i '' "s/nifi.cluster.flow.election.max.candidates=.*/nifi.cluster.flow.election.max.candidates=1/" nifi-1/conf/nifi.properties
     sed -i '' "s/nifi.cluster.flow.election.max.wait.time=5 mins/nifi.cluster.flow.election.max.wait.time=1 mins/" nifi-1/conf/nifi.properties
+
+    sed -i '' "s/<property name=\"Initial User Identity 1\"><\/property>/<property name=\"Initial User Identity 1\">CN=admin, OU=NIFI<\/property><property name=\"Initial User Identity 2\">CN=$HOSTNAME, OU=NIFI<\/property>/" nifi-1/conf/authorizers.xml
+    sed -i '' "s/Initial Admin Identity\">/Initial Admin Identity\">CN=admin, OU=NIFI/" nifi-1/conf/authorizers.xml
+    sed -i '' "s/Node Identity 1\">/Node Identity 1\">CN=$HOSTNAME, OU=NIFI/" nifi-1/conf/authorizers.xml
 
     #sh nifi-1/bin/nifi.sh restart & tail -f nifi-1/logs/nifi-app.log
 
