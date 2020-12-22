@@ -1,7 +1,11 @@
 
-The scripts requires a nifi-0 which is simply extract of nifi-1.12.1-bin.tar.
+###Prequsite
+  -- nifi-1.1x-bin.tar ball extracted as nifi-0 in root directory.
+   For Secure cluster
+  -- nifi-toolkit-1.1x-bin.tar ball extracted as nifi-toolkit in root directory. 
 
-1.) Use "sh create_secure_cluster.sh <1/2/3>" to create one/two/three node cluster.
+
+1.) Use "sh create_insecure_cluster.sh <1/2/3>" to create one/two/three node cluster.
 
 2.) Use "sh start.sh <1/2/3>" to start one/two/three node cluster.
 
