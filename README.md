@@ -1,5 +1,5 @@
 
-1.) Use "sh create_cluster.sh <1/2/3>" to create one/two/three node cluster.
+1.) Use "sh create_insecure_cluster.sh <1/2/3>" to create one/two/three node cluster.
 
 2.) Use "sh start.sh <1/2/3>" to start one/two/three node cluster.
 

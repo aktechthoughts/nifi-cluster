@@ -28,7 +28,7 @@ case "$1" in
     ;;
 2)  echo  "Starting two nodes."
      
-    sh create_cluster.sh 1
+    sh create_secure_cluster.sh 1
     rm -Rf nifi-2 > /dev/null 2>&1
     cp -rf nifi-1 nifi-2    
 
@@ -56,7 +56,7 @@ case "$1" in
 
     ;;
 3)  echo  "Starting three node."
-    sh create_cluster.sh 2
+    sh create_secure_cluster.sh 2
     rm -Rf nifi-3 > /dev/null 2>&1
     
     cp -rf nifi-2 nifi-3
