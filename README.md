@@ -16,6 +16,7 @@ Prequsite
 5.) Use "sh create_certificates.sh <1/2/3>" to create one/two/three certificates inside certs directory(Used inside create_secure_cluster.sh ).
 
 
+Secure
 Prequsite
 
   -- nifi-1.1x-bin.tar ball extracted as nifi-0 in root directory.
