@@ -2,6 +2,7 @@
 Insecure
 
 Prequsite
+
   -- nifi-1.1x-bin.tar ball extracted as nifi-0 in root directory.
 
 1.) Use "sh create_insecure_cluster.sh <1/2/3>" to create one/two/three node cluster.
@@ -16,7 +17,9 @@ Prequsite
 
 
 Prequsite
+
   -- nifi-1.1x-bin.tar ball extracted as nifi-0 in root directory.
+
   -- nifi-toolkit-1.1x-bin.tar ball extracted as nifi-toolkit in root directory. 
 
 1.) Use "sh create_secure_cluster.sh <1/2/3>" to create one/two/three node cluster.
