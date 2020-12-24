@@ -1,16 +1,22 @@
 #!/bin/bash
-set -x
+#set -x
 mkdir -p certs
 
 if [ ! -e "certs/nifi-cert.pem" ] || [ ! -e "certs/nifi-key.key" ] ; then
     ./nifi-toolkit/bin/tls-toolkit.sh standalone -o certs
 fi
 
+if [ -e "certs/"$HOSTNAME".p12" ] &&
+   [ -e "certs/"$HOSTNAME".password" ] &&
+   [ -e "certs/admin.p12" ] &&
+   [ -e "certs/admin.password" ]; then
+      exit
+fi
 
 case "$1" in
 
 1)  echo "Creating certificate for Single node."
-    
+
     rm -Rf certs/node*
     
     ./nifi-toolkit/bin/tls-toolkit.sh standalone -o ./certs/ -n $HOSTNAME \

@@ -1,18 +1,18 @@
 #!/bin/bash
-set -x
+#set -x
 
 
 
 case "$1" in
 
-1)  echo "Starting single node."
+1)  echo "Creating Node one."
 
     rm -Rf nifi-1 > /dev/null 2>&1
     cp -r nifi-0 nifi-1 
 
     ./create_certificate.sh 1
 
-    mv certs/node01/* nifi-1/conf/
+    cp certs/node01/* nifi-1/conf/
     
     sed -i '' "s/nifi.state.management.embedded.zookeeper.start=false/nifi.state.management.embedded.zookeeper.start=true/" nifi-1/conf/nifi.properties
     mkdir -p nifi-1/state/zookeeper/
@@ -39,7 +39,7 @@ case "$1" in
     #sh nifi-1/bin/nifi.sh restart & tail -f nifi-1/logs/nifi-app.log
 
     ;;
-2)  echo  "Starting two nodes."
+2)  echo  "Creating node two."
      
     sh create_secure_cluster.sh 1
     rm -Rf nifi-2 > /dev/null 2>&1
@@ -72,7 +72,7 @@ case "$1" in
     # tail -f nifi-2/logs/nifi-app.log
 
     ;;
-3)  echo  "Starting three node."
+3)  echo  "Creating node three."
     sh create_secure_cluster.sh 2
     rm -Rf nifi-3 > /dev/null 2>&1
     
