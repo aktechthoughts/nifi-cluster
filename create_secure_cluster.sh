@@ -20,7 +20,7 @@ case "$1" in
 
     sed -i '' "s/^nifi.web.http.port=.*/nifi.web.http.port=/" nifi-1/conf/nifi.properties
     sed -i '' "s/^nifi.web.https.host=.*/nifi.web.https.host=$HOSTNAME/" nifi-1/conf/nifi.properties
-    sed -i '' "s/^nifi.web.https.port=.*/nifi.web.https.port=8443/" nifi-1/conf/nifi.properties
+    sed -i '' "s/^nifi.web.https.port=.*/nifi.web.https.port=9443/" nifi-1/conf/nifi.properties
 
     sed -i '' "s/nifi.remote.input.secure=.*/nifi.remote.input.secure=true/" nifi-1/conf/nifi.properties
     sed -i '' "s/nifi.cluster.protocol.is.secure=.*/nifi.cluster.protocol.is.secure=true/" nifi-1/conf/nifi.properties
@@ -52,7 +52,7 @@ case "$1" in
 
     sed -i '' "s/^nifi.web.http.port=.*/nifi.web.http.port=/" nifi-2/conf/nifi.properties
     sed -i '' "s/^nifi.web.https.host=.*/nifi.web.https.host=$HOSTNAME/" nifi-2/conf/nifi.properties
-    sed -i '' "s/^nifi.web.https.port=.*/nifi.web.https.port=8444/" nifi-2/conf/nifi.properties
+    sed -i '' "s/^nifi.web.https.port=.*/nifi.web.https.port=9444/" nifi-2/conf/nifi.properties
 
    
     sed -i '' "s/nifi.cluster.flow.election.max.candidates=.*/nifi.cluster.flow.election.max.candidates=2/" nifi-1/conf/nifi.properties
@@ -89,7 +89,7 @@ case "$1" in
 
     sed -i '' "s/^nifi.web.http.port=.*/nifi.web.http.port=/" nifi-3/conf/nifi.properties
     sed -i '' "s/^nifi.web.https.host=.*/nifi.web.https.host=$HOSTNAME/" nifi-3/conf/nifi.properties
-    sed -i '' "s/^nifi.web.https.port=.*/nifi.web.https.port=8445/" nifi-3/conf/nifi.properties
+    sed -i '' "s/^nifi.web.https.port=.*/nifi.web.https.port=9445/" nifi-3/conf/nifi.properties
 
     sed -i '' "s/nifi.cluster.flow.election.max.candidates=.*/nifi.cluster.flow.election.max.candidates=3/" nifi-1/conf/nifi.properties
     sed -i '' "s/nifi.cluster.flow.election.max.candidates=.*/nifi.cluster.flow.election.max.candidates=3/" nifi-2/conf/nifi.properties
