@@ -3,8 +3,8 @@
 mkdir -p certs
 
 export HOSTNAME=$HOSTNAME
-export USERNAME=admin
-export PASSWORD=admin
+export USERNAME=devadmin
+export PASSWORD=devadmin
 
 export KS_PASSWORD=k0ocT3Fepp
 export TS_PASSWORD=ktpjvq2616
@@ -33,7 +33,7 @@ case "$1" in
           -B $PASSWORD \
           -C "CN="$USERNAME",OU=NIFI" \
           -C "CN="$HOSTNAME",OU=NIFI" \
-          -c $HOSTNAME \
+          -c 'ca.nifi' \
           -O
 
     mv certs/$HOSTNAME certs/node01
@@ -49,12 +49,14 @@ case "$1" in
     rm -Rf certs/node*
     
     ./nifi-toolkit/bin/tls-toolkit.sh standalone -o ./certs/ -n $HOSTNAME\(2\) \
-          -P tsStorePasswod \
-          -S ksStorePassword \
-          -B admin \
-          -C 'CN=admin,OU=NIFI' \
+          -P $KS_PASSWORD \
+          -S $TS_PASSWORD \
+          -B $PASSWORD \
+          -C "CN="$USERNAME",OU=NIFI" \
           -C "CN="$HOSTNAME",OU=NIFI" \
+          -c 'ca.nifi' \
           -O
+
     mv -f certs/$HOSTNAME certs/node01  
     mv -f certs/$HOSTNAME"_2" certs/node02 
     mv certs/CN=admin_OU=NIFI.p12 certs/admin.p12
@@ -69,12 +71,14 @@ case "$1" in
     rm -Rf certs/node*
   
     ./nifi-toolkit/bin/tls-toolkit.sh standalone -o ./certs/ -n $HOSTNAME\(3\) \
-          -P tsStorePasswod \
-          -S ksStorePassword \
-          -B admin \
-          -C 'CN=admin,OU=NIFI' \
+          -P $KS_PASSWORD \
+          -S $TS_PASSWORD \
+          -B $PASSWORD \
+          -C "CN="$USERNAME",OU=NIFI" \
           -C "CN="$HOSTNAME",OU=NIFI" \
+          -c 'ca.nifi' \
           -O
+
     mv -f certs/$HOSTNAME certs/node01 
     mv -f certs/$HOSTNAME"_2" certs/node02 
     mv -f certs/$HOSTNAME"_3" certs/node03

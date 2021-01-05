@@ -2,7 +2,7 @@
 #set -x
 
 export HOSTNAME=$HOSTNAME
-export USERNAME=nifiadmin
+export USERNAME=devadmin
 
 case "$1" in
 
@@ -36,7 +36,7 @@ case "$1" in
     sed -i '' "s/nifi.cluster.flow.election.max.wait.time=5 mins/nifi.cluster.flow.election.max.wait.time=1 mins/" nifi-1/conf/nifi.properties
 
     sed -i '' "s/<property name=\"Initial User Identity 1\"><\/property>/<property name=\"Initial User Identity 1\">CN=admin, OU=NIFI<\/property><property name=\"Initial User Identity 2\">CN=$NODENAME, OU=NIFI<\/property>/" nifi-1/conf/authorizers.xml
-    sed -i '' "s/Initial Admin Identity\">/Initial Admin Identity\">CN=admin, OU=NIFI/" nifi-1/conf/authorizers.xml
+    sed -i '' "s/Initial Admin Identity\">/Initial Admin Identity\">CN="$USERNAME", OU=NIFI/" nifi-1/conf/authorizers.xml
     sed -i '' "s/Node Identity 1\">/Node Identity 1\">CN=$NODENAME, OU=NIFI/" nifi-1/conf/authorizers.xml
 
     sed -i '' "s/\"Connect String\">/\"Connect String\">$NODENAME:2181/" nifi-1/conf/state-management.xml
