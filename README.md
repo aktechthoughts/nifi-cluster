@@ -59,7 +59,7 @@ We can use
 
 **STEP 1: Install Nginx on the machine which acts as a proxy.**
 
-1. Install Nginx on ubuntu machine using this [link].(https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04)
+1. Install Nginx on ubuntu machine using this [link](https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04)
 2. Create secure NIFI cluster usint the steps given in "Creating Secure NiFi".
 3. You can use sample nginx.conf configuration file in the nginx.
 
