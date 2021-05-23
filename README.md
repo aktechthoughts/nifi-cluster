@@ -7,11 +7,11 @@ We can follow below guide to create NiFi cluster in both the modes.
 
 ## Creating Insecure NiFi
 
-** Prequsite **
+**Prequsite**
 - Download NiFi binary from [Here] (https://nifi.apache.org/download.html).
 - Extract the nifi-1.1x-bin.tar ball extracted as nifi-0 in root directory.
 
-** Steps **
+**Steps**
 
 1. Execute the shell script in the root directory to create to create one/two/three node cluster.
  ~$ sh create_insecure_cluster.sh <1/2/3>
@@ -24,8 +24,8 @@ We can follow below guide to create NiFi cluster in both the modes.
   
 4. Use see nifi-app.log for 1st, 2nd or 3rd node.
  ~$ sh status.sh <1/2/3>
-  
-5.) Use "sh create_certificates.sh <1/2/3>" to create one/two/three certificates inside certs directory(Used inside create_secure_cluster.sh ).
+
+5. Use "sh create_certificates.sh <1/2/3>" to create one/two/three certificates inside certs directory(Used inside create_secure_cluster.sh ).
 
 
 Secure
