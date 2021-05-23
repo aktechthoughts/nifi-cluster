@@ -4,7 +4,7 @@ NiFi cluster can be created in two modes - Secure and Insecure. Insecure mode is
 
 The scripts attached in this repository can be used to secure as well as insecure NiFi cluster. The scripts encapsulate all the details of configuration and make cluster creation process very easy. It can be used with ansible script for automation of NiFi cluster.
 
-![NiFi](images/NiFi_Cluster.jpg?raw=true "Secure NiFi Cluster Architecture")
+![Secure NiFi Cluster Architecture](images/NiFi_Cluster.jpg?raw=true "Secure NiFi Cluster Architecture")
 
 We can follow below guide to create NiFi cluster in both the modes.
 
