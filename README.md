@@ -2,6 +2,10 @@
 # Creating Apache NiFi Cluster
 NiFi cluster can be created in two modes - Secure and Insecure. Insecure mode is good for a quick POC, but as soon as we want to use NiFi for production we need secure NiFi
 
+The scripts attached in this repository can be used to secure as well as insecure NiFi cluster. The scripts encapsulate all the details of configuration and make cluster creation process very easy. It can be used with ansible script for automation of NiFi cluster.
+
+![Secure NiFi Cluster Architecture](images/NiFi_Cluster.png?raw=true "Secure NiFi Cluster Architecture")
+
 We can follow below guide to create NiFi cluster in both the modes.
 
 
@@ -24,6 +28,7 @@ We can follow below guide to create NiFi cluster in both the modes.
 
 ## Creating Secure NiFi
 
+
 **Prequsite**
 
 - Download NiFi binary from [Here](https://nifi.apache.org/download.html).
@@ -42,6 +47,8 @@ We can follow below guide to create NiFi cluster in both the modes.
 5. Use see nifi-app.log for 1st, 2nd or 3rd node.<br/>~$ sh status.sh <1/2/3>
 
 ## Using Nginx as reverse proxy for NiFi.
+
+We can use 
 
 **STEP 1: Install Nginx on the machine which acts as a proxy.**
 
