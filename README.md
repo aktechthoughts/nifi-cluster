@@ -8,7 +8,7 @@ We can follow below guide to create NiFi cluster in both the modes.
 ## Creating Insecure NiFi
 
 **Prequsite**
-- Download NiFi binary from [Here] (https://nifi.apache.org/download.html).
+- Download NiFi binary from [Here](https://nifi.apache.org/download.html).
 - Extract the nifi-1.1x-bin.tar ball extracted as nifi-0 in root directory.
 
 **Steps**
