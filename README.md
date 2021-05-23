@@ -21,48 +21,43 @@ We can follow below guide to create NiFi cluster in both the modes.
   
 4. Use see nifi-app.log for 1st, 2nd or 3rd node.<br/>~$ sh status.sh <1/2/3>
 
-5. Use "sh create_certificates.sh <1/2/3>" to create one/two/three certificates inside certs directory(Used inside create_secure_cluster.sh ).
 
+## Creating Secure NiFi
 
-Secure
-Prequsite
+**Prequsite**
 
-  -- nifi-1.1x-bin.tar ball extracted as nifi-0 in root directory.
+- Download NiFi binary from [Here](https://nifi.apache.org/download.html).
+- Extract the nifi-1.1x-bin.tar ball extracted as nifi-0 in root directory.
+- Download nifi-toolkit binary from [Here](https://nifi.apache.org/download.html).
+- nifi-toolkit-1.1x-bin.tar ball extracted as nifi-toolkit in root directory. 
 
-  -- nifi-toolkit-1.1x-bin.tar ball extracted as nifi-toolkit in root directory. 
+1. Create one/two/three certificates inside certs directory using <br/>~$sh create_certificates.sh <1/2/3>
 
-1.) Use "sh create_secure_cluster.sh <1/2/3>" to create one/two/three node cluster.
+2. Use create_secure_cluster.sh to create one/two/three node cluster.sh <br/>~$create_secure_cluster.sh <1/2/3>
 
-2.) Use "sh start.sh <1/2/3>" to start one/two/three node cluster.
+3. Use below script to start the clusters, use parameter (1/2/3) as the required configuration.<br/>~$ sh start.sh <1/2/3>
 
-3.) Use "sh stop.sh <1/2/3>" to stop one/two/three node cluster.
+4. To stop the cluster use the script stop.sh<br/>~$ sh stop.sh <1/2/3>
+  
+5. Use see nifi-app.log for 1st, 2nd or 3rd node.<br/>~$ sh status.sh <1/2/3>
 
-4.) Use "sh status.sh <1/2/3>" to see nifi-app.log for 1st, 2nd or 3rd node.
+## Using Nginx as reverse proxy for NiFi.
 
-5.) Use "sh create_certificates.sh <1/2/3>" to create one/two/three certificates inside certs directory(Used inside create_secure_cluster.sh ).
+**STEP 1: Install Nginx on the machine which acts as a proxy.**
 
+1. Install Nginx on ubuntu machine using this [link].(https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04)
+2. Create secure NIFI cluster usint the steps given in "Creating Secure NiFi".
+3. You can use sample nginx.conf configuration file in the nginx.
 
-####
+**STEP 2: Make nginx secure (https).**
 
-Use below steps for using nginx as reverse proxy.
-
-####
-
-
-1.) Install nginx on ubuntu machine.
-
-2.) Create secure NIFI cluster.
-
-3.) Use the attached configuration file.
-
-4.) Create a rsa key.
-     openssl genrsa -out example.com.key 2048
-5.) Create a certificate sign request.
+1. Create a rsa key file using openssl, which available in most ubuntu machines.<br/>
+     ~$openssl genrsa -out example.com.key 2048
+2. Create a certificate sign request.<br/>
      openssl req -new -key example.com.key -out example.com.csr
-6.) Create config file (example.com.ext) using below
+3. Create a config file (example.com.ext) for the dns used in the nginx server. Use below configuration file.<br/><br/>
 
 -----
-
 authorityKeyIdentifier=keyid,issuer
 basicConstraints=CA:FALSE
 keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
@@ -73,22 +68,42 @@ DNS.1 = example.com
 
 ----
 
-7.) Sign the certificate using existing CA (nifi-cert.pem)
-    openssl x509 -req -in example.com.csr  \
+4. We need to sign the certificates using CA (Certificate authority) file used to make NiFi secure.<br/><br/>
+Sign the certificate using existing CA (nifi-cert.pem)<br/>
+    ~$openssl x509 -req -in example.com.csr  \
                  -CA nifi-cert.pem \
                  -CAkey nifi-key.key \
                  -CAcreateserial \
                  -out example.com.crt \
                  -days 825 -sha256 \
-                 -extfile example.com.ext
+                 -extfile example.com.ext<br/>
 
-8.) Use example.com.key, example.com.crt and nifi-cert.pem as ssl_certificate, ssl_certificate_key and ssl_client_certificate respectively.
+The command generates - example.com.crt
 
-10.) Using existing user (admin) as proxy_ssl_certificate, proxy_ssl_certificate_key and 
-     proxy_ssl_trusted_certificate.
+5. Use example.com.key, example.com.crt and nifi-cert.pem in the nginx.conf. as given below.<br/><br/> 
 
-     Generate key from p12:  openssl pkcs12 -in admin.p12 -nocerts -out admin.key
-     Generate cert from p12: openssl pkcs12 -in admin.p12 -clcerts -nokeys -out admin.crt 
-     Remove passphrase from key: openssl pkcs12 -in admin.p12 -nocerts -out admin.key
+ssl_certificate /home/nifi_user/nginx//example.com.crt;<br/>
+ssl_certificate_key /home/nifi_user/nginx/example.com.key;<br/>
+ssl_client_certificate /home/nifi_user/nginx/nifi-cert.pem;<br/><br/>
+
+This step configures https on nginx using CA file, which is a self sign certificate.
+
+6. Secure NiFi cluster requires users to send - admin.p12 created in the step "Creating Secure NiFi".<br/>
+Use below directive in the nginx.conf.<br/><br/>
+
+proxy_ssl_certificate /home/nifi_user/nginx/admin.crt;<br/>
+proxy_ssl_certificate_key /home/nifi_user/nginx/admin.key;<br/>
+proxy_ssl_trusted_certificate /home/nifi_user/nginx/nifi-cert.pem;<br/>
+
+The files required in this step can be generated following below steps.<br/>
+
+7. Generate proxy certificates and key<br/><br/>
+
+     - Generate key from p12:  <br/>
+     ~$openssl pkcs12 -in admin.p12 -nocerts -out admin.key<br/>
+     - Generate cert from p12: <br/>
+     ~$openssl pkcs12 -in admin.p12 -clcerts -nokeys -out admin.crt <br/>
+     - Remove passphrase from key: <br/>
+     ~$openssl pkcs12 -in admin.p12 -nocerts -out admin.key
 
 
