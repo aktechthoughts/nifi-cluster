@@ -13,17 +13,13 @@ We can follow below guide to create NiFi cluster in both the modes.
 
 **Steps**
 
-1. Execute the shell script in the root directory to create to create one/two/three node cluster.
- ~$ sh create_insecure_cluster.sh <1/2/3>
+1. Execute the shell script in the root directory to create to create one/two/three node cluster.  ~$ sh create_insecure_cluster.sh <1/2/3>
 
-2. Use below script to start the clusters, use parameter (1/2/3) as the required configuration.
- ~$ sh start.sh <1/2/3>
+2. Use below script to start the clusters, use parameter (1/2/3) as the required configuration.  ~$ sh start.sh <1/2/3>
 
-3. To stop the cluster use the script stop.sh
- ~$ sh stop.sh <1/2/3>
+3. To stop the cluster use the script stop.sh  ~$ sh stop.sh <1/2/3>
   
-4. Use see nifi-app.log for 1st, 2nd or 3rd node.
- ~$ sh status.sh <1/2/3>
+4. Use see nifi-app.log for 1st, 2nd or 3rd node.  ~$ sh status.sh <1/2/3>
 
 5. Use "sh create_certificates.sh <1/2/3>" to create one/two/three certificates inside certs directory(Used inside create_secure_cluster.sh ).
 
