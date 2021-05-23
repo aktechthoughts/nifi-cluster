@@ -7,10 +7,10 @@ The scripts attached in this repository can be used to secure as well as insecur
 ![Secure NiFi Cluster Architecture](https://i.imgur.com/Jd8CV37.jpg)
 
 In this repository we are covering the following.
- 
-### Creating Insecure NiFi
-### Creating Secure NiFi
-### Using Nginx as reverse proxy for NiFi.
+
+#### - Creating Insecure NiFi
+#### - Creating Secure NiFi
+#### - Using Nginx as reverse proxy for NiFi.
 
 
 We can follow below guide to create NiFi cluster in both the modes.
