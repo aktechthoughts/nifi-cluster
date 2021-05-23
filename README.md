@@ -1,18 +1,30 @@
 
-Insecure
+# Creating Apache NiFi Cluster
+NiFi cluster can be created in two modes - Secure and Insecure. Insecure mode is good for a quick POC, but as soon as we want to use NiFi for production we need secure NiFi
 
-Prequsite
+We can follow below guide to create NiFi cluster in both the modes.
 
-  -- nifi-1.1x-bin.tar ball extracted as nifi-0 in root directory.
 
-1.) Use "sh create_insecure_cluster.sh <1/2/3>" to create one/two/three node cluster.
+## Creating Insecure NiFi
 
-2.) Use "sh start.sh <1/2/3>" to start one/two/three node cluster.
+** Prequsite **
+- Download NiFi binary from [Here] (https://nifi.apache.org/download.html).
+- Extract the nifi-1.1x-bin.tar ball extracted as nifi-0 in root directory.
 
-3.) Use "sh stop.sh <1/2/3>" to stop one/two/three node cluster.
+** Steps **
 
-4.) Use "sh status.sh <1/2/3>" to see nifi-app.log for 1st, 2nd or 3rd node.
+1. Execute the shell script in the root directory to create to create one/two/three node cluster.
+ ~$ sh create_insecure_cluster.sh <1/2/3>
 
+2. Use below script to start the clusters, use parameter (1/2/3) as the required configuration.
+ ~$ sh start.sh <1/2/3>
+
+3. To stop the cluster use the script stop.sh
+ ~$ sh stop.sh <1/2/3>
+  
+4. Use see nifi-app.log for 1st, 2nd or 3rd node.
+ ~$ sh status.sh <1/2/3>
+  
 5.) Use "sh create_certificates.sh <1/2/3>" to create one/two/three certificates inside certs directory(Used inside create_secure_cluster.sh ).
 
 
